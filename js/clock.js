@@ -1,16 +1,32 @@
-// interval이란: 매번 일어나야 하는 무언가. ex)매 2초마다 ... 
-// 이런 기능을 제공하는 tool이 setInterval(호출하려는 function, 매 호출 사이 시간)
+// Date Object
+// new Date(); // 오늘의 날짜와 시간을 가지고 온다.
+
+// const date = new Date();
+// date.getDate(); // 일
+// date.getDay(); // 요일
+// date.getFullYear(); // 년
+// date.getHours(); // 시
+// date.getMinutes(); // 분
+// date.getSeconds(); // 초
+
 const clock = document.querySelector("h2#clock");
 
-function sayHello(){
-    console.log("hello");
-}
+function getClock() {
+    const date = new Date();
+    //number이기 때문에 String으로 변환해서 padStart()사용해야된다.
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    clock.innerText = `${hours}:${minutes}:${seconds}`;
+  }
+  
+  // setInterval은 1000ms후에 시작되니 새로고침 하자마자 시간이 보이도록 함수를 호출!
+  getClock(); 
+  setInterval(getClock, 1000);
 
-setInterval(sayHello, 5000);
-// setTimeout(sayHello, 5000);
-
-
-
-// setInterval vs setTimeout
-// 1. setInterval: 지정된 주기로 특정 코드를 실행 vs setTimeout: 지정된 초가 지난 후 특정 코드를 1회 실행
-// 2.중첩 setTimeout은 시간 지연 간격을 보장하지만 setInterval은 시간 지연을 보장하지 않습니다.
+  // padStart() => "1".padStart(2, "0");
+  // padStart()를 사용해 padding을 String부분에 추가.
+  // String이 가져야 하는 길이를 설정하고 그렇지 않다면 String의 앞쪽에 추가.
+  // 길이가 2가 되지 않으면 시작하는 부분에서 부터 0추가
+  // 1.padEnd(2, "0"); => 길이가 2가 되지 않으면 뒷부분에 0추가
+  
